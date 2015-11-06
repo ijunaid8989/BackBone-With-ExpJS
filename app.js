@@ -24,8 +24,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var dbUrl = "library"
+  , collections = ["books"]
+  , mongojs = require("mongojs");
+
+var db = mongojs(dbUrl,collections);
+
+
+
+app.get('/books', function(req,res){
+  db.books.find({},function(err,books){
+    if (err) return;
+    var response = {
+      books: books
+    }
+    res.json(response);
+  });
+});
+
 app.use('/', routes);
-app.use('/users', users);
+
 
 
 //createServer
