@@ -5,7 +5,7 @@ var express = require('express')
   , cookieParser = require('cookie-parser')
   , bodyParser = require('body-parser')
   , http = require('http')
-  , port = normalizePort(process.env.PORT || '3000');
+  , port = process.env.PORT || '3000';
 
 
 var routes = require('./routes/index');
