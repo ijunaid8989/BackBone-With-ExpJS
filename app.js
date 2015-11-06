@@ -21,7 +21,14 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(function(req, res, next) {
+    // IE9 doesn't set headers for cross-domain ajax requests
+    if(typeof(req.headers['content-type']) === 'undefined'){
+        req.headers['content-type'] = "application/json; charset=UTF-8";
+    }
+    next();
+});
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
