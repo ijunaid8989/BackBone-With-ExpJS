@@ -5,8 +5,9 @@ var express = require('express')
   , cookieParser = require('cookie-parser')
   , bodyParser = require('body-parser')
   , http = require('http')
-  , port = process.env.PORT || '3000';
+  , port = process.env.PORT || '8090';
 
+//var urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 var routes = require('./routes/index');
 
@@ -20,29 +21,14 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var dbUrl = "library"
-  , collections = ["books"]
-  , mongojs = require("mongojs");
 
-var db = mongojs(dbUrl,collections);
+app.get('/books', routes.books.all);
+app.get('/books/:id',routes.books.one);
 
-
-
-app.get('/books', function(req,res){
-  db.books.find({},function(err,books){
-    if (err) return;
-    var response = {
-      books: books
-    }
-    res.json(response);
-  });
-});
-
-app.use('/', routes);
 
 
 
