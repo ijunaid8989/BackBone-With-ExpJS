@@ -1,4 +1,15 @@
-extends layout
-
-block content
-  h1 Backbone App
+doctype html
+html
+  head
+    title BackboneApp
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/lib/underscore.js')
+    script(src='/javascripts/lib/jquery.js')
+    script(src='/javascripts/lib/backbone.js')
+    script(src='/javascripts/lib/handlebars.js')
+    script(src='/javascripts/client.js')
+    script(src='/javascripts/init.js')
+  body
+    h1 Backbone APp
+    script(id="book-template",type="text/x-handlebars-template")
+      {{name}} by {{author}}
