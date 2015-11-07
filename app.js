@@ -5,7 +5,7 @@ var express = require('express')
   , cookieParser = require('cookie-parser')
   , bodyParser = require('body-parser')
   , http = require('http')
-  , port = process.env.PORT || '8090';
+  , port = process.env.PORT || '3000';
 
 //var urlencodedParser = bodyParser.urlencoded({ extended: true });
 
@@ -27,8 +27,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+app.get('/',routes.index);
 app.get('/books', routes.books.all);
 app.get('/books/:id',routes.books.one);
+app.post('/books',routes.books.create);
 
 
 
