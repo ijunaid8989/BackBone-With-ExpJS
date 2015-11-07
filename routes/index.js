@@ -1,4 +1,5 @@
 var db = require('../database.js');
+var mongojs = require('mongojs');
 
 exports.books = {};
 
@@ -12,6 +13,15 @@ exports.books.all =  function(req,res){
 	});
 };
 
+
 exports.books.one = function(req,res){
-	console.log(req.body);
+	var bookId = db.ObjectId(req.params.id);
+	console.log(bookId);
+	db.books.findOne({ _id: bookId}, function(err,book){
+		if (err) return;
+		var response = {
+			book : book
+		};
+		res.json(response);
+	});
 };
