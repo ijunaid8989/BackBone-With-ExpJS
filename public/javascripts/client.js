@@ -30,3 +30,18 @@ var BookCollectionView = Backbone.View.extend({
 		return this;
 	}
 });
+
+
+var AppRouter = Backbone.Router.extend({
+	routes : {
+		"" : "index"
+	},
+	index : function(){
+		var collection = new BackboneCollection();
+		collection.fetch();
+		collection.each(function(data){
+			var view = new BookCollectionView({collection : collection});
+			$(".app").html(view.render().el);
+		})
+	}
+});
