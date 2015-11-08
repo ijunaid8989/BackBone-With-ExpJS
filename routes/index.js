@@ -1,10 +1,9 @@
 var db = require('../database.js');
 var mongojs = require('mongojs');
 
-
 exports.index = function(req,res){
-	res.render("index");
-};
+	res.render('index');
+}
 
 exports.books = {};
 
