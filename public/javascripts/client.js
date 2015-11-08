@@ -26,7 +26,7 @@ var BookCollectionView = Backbone.View.extend({
 	tagName : 'ul',
 	addClass : 'books',
 	render : function(){
-		
+		this.$el.html("");
 		this.collection.each(function(book){
 			var bookView = new BookView({ model : book });
 		this.$el.append(bookView.render().el);	
